@@ -1,0 +1,5 @@
+ZABBIX TEMPLATES
+ - NTA
+ - ADS
+ - ADSM
+ - WAF
