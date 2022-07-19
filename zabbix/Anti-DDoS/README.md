@@ -4,6 +4,12 @@ Template NSFOCUS Performance (NTA & ADSM)
 Template NSFOCUS ADS Performance
  - CPU and Memory usage with triggers and graphs
 
--Template NSFOCUS Storage (NTA & ADSM)-
--Template NSFOCUS Interfaces (NTA & ADSM)-
--Template NSFOCUS Health (NTA & ADSM)-
+Template NSFOCUS Storage (NTA & ADSM)
+ - Discovery of disks
+
+Template NSFOCUS Interfaces (NTA & ADSM)
+ - Discovery of interfaces
+
+Template NSFOCUS Health (NTA & ADSM)
+ - Check CPU and motherboard temperature
+ - Check Fan Status
