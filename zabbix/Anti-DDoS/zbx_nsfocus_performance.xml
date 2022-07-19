@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2022-07-19T14:44:56Z</date>
+    <date>2022-07-19T19:44:54Z</date>
     <groups>
         <group>
             <name>Templates/Modules</name>
@@ -9,8 +9,9 @@
     </groups>
     <templates>
         <template>
-            <template>Template NSFOCUS Devices</template>
-            <name>Template NSFOCUS Devices</name>
+            <template>Template NSFOCUS Performance</template>
+            <name>Template NSFOCUS Performance</name>
+            <description>NTA &amp; ADSM</description>
             <groups>
                 <group>
                     <name>Templates/Modules</name>
@@ -66,6 +67,7 @@ CPU utilization is too high. The system might be slow to respond.</description>
                     <type>SNMP_AGENT</type>
                     <snmp_oid>discovery[{#MEM.UTIL},1.3.6.1.4.1.19849.4.6.2.2]</snmp_oid>
                     <key>system.mem.util</key>
+                    <history>7d</history>
                     <value_type>FLOAT</value_type>
                     <units>%</units>
                     <applications>
@@ -127,7 +129,7 @@ Memory utilization is too high. The system might be slow to respond.</descriptio
                     <drawtype>GRADIENT_LINE</drawtype>
                     <color>1A7C11</color>
                     <item>
-                        <host>Template NSFOCUS Devices</host>
+                        <host>Template NSFOCUS Performance</host>
                         <key>system.cpu.util</key>
                     </item>
                 </graph_item>
@@ -143,7 +145,7 @@ Memory utilization is too high. The system might be slow to respond.</descriptio
                     <drawtype>GRADIENT_LINE</drawtype>
                     <color>1A7C11</color>
                     <item>
-                        <host>Template NSFOCUS Devices</host>
+                        <host>Template NSFOCUS Performance</host>
                         <key>system.mem.util</key>
                     </item>
                 </graph_item>
