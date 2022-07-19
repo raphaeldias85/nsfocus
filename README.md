@@ -1,3 +1,2 @@
-# nsfocus
-NSFOCUS SCRIPTS
+# NSFOCUS SCRIPTS
 Visit: https://nsfocusglobal.com/
