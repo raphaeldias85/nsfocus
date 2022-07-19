@@ -1,3 +1,4 @@
+# zbx_nsfocus_performance.xml
 Template NSFOCUS Performance (NTA & ADSM)
  - CPU and Memory usage with triggers and graphs
 
