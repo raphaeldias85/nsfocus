@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-07-20T19:36:37Z</date>
+    <groups>
+        <group>
+            <name>Templates/Modules</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template NSFOCUS ADS Health</template>
+            <name>Template NSFOCUS ADS Health</name>
+            <description>ADS</description>
+            <groups>
+                <group>
+                    <name>Templates/Modules</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>CPU</name>
+                </application>
+                <application>
+                    <name>Fan</name>
+                </application>
+                <application>
+                    <name>Motherboard</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>CPU Temperature</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#CPU.TEMP},1.3.6.1.4.1.19849.6.2.6]</snmp_oid>
+                    <key>system.cpu.temp</key>
+                    <delay>5m</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>C</units>
+                    <applications>
+                        <application>
+                            <name>CPU</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$..['{#CPU.TEMP}'].avg()</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$CPU.TEMP.CRIT}</expression>
+                            <name>High CPU Temperature (over {$CPU.TEMP.CRIT}% for 5m)</name>
+                            <priority>HIGH</priority>
+                            <description>Current utilization: {ITEM.LASTVALUE1}&#13;
+CPU temperature is too high.</description>
+                        </trigger>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$CPU.TEMP.WARN}</expression>
+                            <name>High CPU Temperature (over {$CPU.TEMP.WARN}% for 5m)</name>
+                            <priority>AVERAGE</priority>
+                            <description>Current utilization: {ITEM.LASTVALUE1}&#13;
+CPU temperature is too high.</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Fan Status</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#FAN.STATUS},1.3.6.1.4.1.19849.6.2.8]</snmp_oid>
+                    <key>system.fan.status</key>
+                    <delay>5m</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <applications>
+                        <application>
+                            <name>Fan</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$..['{#FAN.STATUS}'].avg()</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{last()}=0</expression>
+                            <name>Fan Status is stopped</name>
+                            <priority>HIGH</priority>
+                            <description>Fan Status is stopped</description>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Motherboard Temperature</name>
+                    <type>SNMP_AGENT</type>
+                    <snmp_oid>discovery[{#MB.TEMP},1.3.6.1.4.1.19849.6.2.7]</snmp_oid>
+                    <key>system.mb.temp</key>
+                    <delay>5m</delay>
+                    <history>7d</history>
+                    <value_type>FLOAT</value_type>
+                    <units>C</units>
+                    <applications>
+                        <application>
+                            <name>Motherboard</name>
+                        </application>
+                    </applications>
+                    <preprocessing>
+                        <step>
+                            <type>JSONPATH</type>
+                            <params>$..['{#MB.TEMP}'].avg()</params>
+                        </step>
+                    </preprocessing>
+                    <triggers>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$MB.TEMP.CRIT}</expression>
+                            <name>High Motherboard Temperature (over {$MB.TEMP.CRIT}% for 5m)</name>
+                            <priority>HIGH</priority>
+                            <description>Current utilization: {ITEM.LASTVALUE1}&#13;
+Motherboard temperature is too high.</description>
+                        </trigger>
+                        <trigger>
+                            <expression>{min(5m)}&gt;{$MB.TEMP.WARN}</expression>
+                            <name>High Motherboard Temperature (over {$MB.TEMP.WARN}% for 5m)</name>
+                            <priority>AVERAGE</priority>
+                            <description>Current: {ITEM.LASTVALUE1}&#13;
+Motherboard temperature is too high. The system might be slow to respond.</description>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <macros>
+                <macro>
+                    <macro>{$CPU.TEMP.CRIT}</macro>
+                    <value>70</value>
+                </macro>
+                <macro>
+                    <macro>{$CPU.TEMP.WARN}</macro>
+                    <value>90</value>
+                </macro>
+                <macro>
+                    <macro>{$MB.TEMP.CRIT}</macro>
+                    <value>90</value>
+                </macro>
+                <macro>
+                    <macro>{$MB.TEMP.WARN}</macro>
+                    <value>70</value>
+                </macro>
+            </macros>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>CPU Temperature</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template NSFOCUS ADS Health</host>
+                        <key>system.cpu.temp</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+        <graph>
+            <name>Motherboard Temperature</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>FIXED</ymax_type_1>
+            <graph_items>
+                <graph_item>
+                    <sortorder>1</sortorder>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>1A7C11</color>
+                    <item>
+                        <host>Template NSFOCUS ADS Health</host>
+                        <key>system.mb.temp</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+</zabbix_export>
